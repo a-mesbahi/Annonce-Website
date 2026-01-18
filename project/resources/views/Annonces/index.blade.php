@@ -2,8 +2,8 @@
 
 @section('content')
 <div class="annonces-modern">
-    @if(auth()->user())
-    <!-- Publish Form Section -->
+    @if(auth()->user() && auth()->user()->user_type === 'recruiter')
+    <!-- Publish Form Section (Only for Recruiters) -->
     <div class="annonce-publish-box">
         <h1 class="annonce-page-title">Create Annonce</h1>
         
@@ -60,6 +60,19 @@
             <button type="submit" class="annonce-submit-btn">Publish Annonce</button>
         </form>
     </div>
+    @elseif(auth()->user() && auth()->user()->user_type === 'job_seeker')
+    <!-- Job Seeker Header -->
+    <div class="annonce-publish-box" style="padding: 30px; text-align: center;">
+        <h1 class="annonce-page-title">Find Your Next Opportunity</h1>
+        <p style="font-size: 16px; color: #666; margin-top: 10px;">Browse available jobs and see your match scores!</p>
+        
+        <!-- Filter Buttons -->
+        <div class="annonce-filters" style="margin-top: 20px;">
+            <a href="{{ route('Annonces') }}" class="filter-btn">All Jobs</a>
+            <a href="{{ route('Annonces.offer') }}" class="filter-btn">Job Offers</a>
+            <a href="{{ route('Annonces.request') }}" class="filter-btn">Requests</a>
+        </div>
+    </div>
     @endif
 
     <!-- Annonces Grid -->
@@ -71,6 +84,12 @@
                 <div class="annonce-item">
                     <a href="{{ route('Annonces.show', $annonce) }}" class="annonce-link">
                         <div class="annonce-img" style="background-image: url('{{$annonce->img_url}}');">
+                            @if(auth()->check() && auth()->user()->user_type === 'job_seeker' && isset($annonce->match_score) && $annonce->match_score > 0)
+                                <div class="match-score-badge match-{{ $annonce->match_score >= 70 ? 'high' : ($annonce->match_score >= 40 ? 'medium' : 'low') }}">
+                                    {{ $annonce->match_score }}%
+                                </div>
+                            @endif
+                            
                             <div class="annonce-type-badge badge-{{ $annonce->annonce_type }}">
                                 {{ ucfirst($annonce->annonce_type) }}
                             </div>

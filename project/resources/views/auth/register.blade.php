@@ -50,6 +50,39 @@
                 </div>
 
                 <div class="auth-form-group">
+                    <label class="auth-label">I am a...</label>
+                    <div class="user-type-selector">
+                        <label class="user-type-option">
+                            <input 
+                                type="radio" 
+                                name="user_type" 
+                                value="job_seeker" 
+                                {{ old('user_type', 'job_seeker') == 'job_seeker' ? 'checked' : '' }}>
+                            <span class="user-type-box">
+                                <span class="user-type-icon">👤</span>
+                                <span class="user-type-text">Job Seeker</span>
+                                <span class="user-type-desc">Looking for opportunities</span>
+                            </span>
+                        </label>
+                        <label class="user-type-option">
+                            <input 
+                                type="radio" 
+                                name="user_type" 
+                                value="recruiter"
+                                {{ old('user_type') == 'recruiter' ? 'checked' : '' }}>
+                            <span class="user-type-box">
+                                <span class="user-type-icon">💼</span>
+                                <span class="user-type-text">Recruiter</span>
+                                <span class="user-type-desc">Posting job offers</span>
+                            </span>
+                        </label>
+                    </div>
+                    @error('user_type')
+                        <div class="auth-error">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                <div class="auth-form-group">
                     <label for="email" class="auth-label">Email</label>
                     <input 
                         type="email" 

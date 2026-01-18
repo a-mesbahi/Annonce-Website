@@ -15,6 +15,7 @@
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li><a href="{{ route('dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ route('Annonces') }}">Annonces</a></li>
+                <li><a href="{{ route('interview.prep') }}">Interview Prep</a></li>
                 <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
             <ul>

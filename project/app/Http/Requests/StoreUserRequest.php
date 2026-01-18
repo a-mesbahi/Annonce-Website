@@ -28,6 +28,7 @@ class StoreUserRequest extends FormRequest
             'username'=>'required|max:255',
             'email'=>'required|email|max:255|unique:users,email',
             'password'=>'required|confirmed',
+            'user_type'=>'required|in:recruiter,job_seeker',
         ];
     }
 }

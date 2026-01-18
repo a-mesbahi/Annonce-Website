@@ -6,6 +6,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\AnnonceController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\InterviewPrepController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +32,8 @@ Route::get('/contact', function () {
     return view('contact');
 })->name('contact');
 
+Route::get('/interview-prep', [InterviewPrepController::class, 'index'])->name('interview.prep');
+
 Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
 Route::get('/register',[RegisterController::class, 'index'])->name('register');
@@ -48,6 +52,8 @@ Route::get('/Annonces/{annonce}/show',[AnnonceController::class, 'show'])->name(
 Route::delete('/Annonces/{annonce}',[AnnonceController::class, 'destroy'])->name('Annonces.destroy');
 Route::get('/Annonces/{annonce}',[AnnonceController::class, 'edit'])->name('Annnoces.edit');
 Route::put('/Annonces/{id}/update',[AnnonceController::class,'update'])->name('Annoce.update');
+
+Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
 
 
