@@ -1,42 +1,67 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="login-container">
-        <div class="decoration">
-            <h1>Welcome Again</h1>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates voluptas unde quasi reprehenderit blanditiis delectus esse distinctio ad quam culpa ratione pariatur nam provident deserunt, deleniti nostrum, magnam nulla aspernatur.</p>
-        </div>
-        <div class="register">
+    <div class="auth-page">
+        <!-- Decorative shapes -->
+        <div class="deco-shape deco-shape-1"></div>
+        <div class="deco-shape deco-shape-2"></div>
+        <div class="deco-shape deco-shape-3"></div>
+        <div class="deco-shape deco-shape-4"></div>
+        <div class="deco-star deco-star-1">✦</div>
+        <div class="deco-star deco-star-2">✧</div>
+        <div class="deco-star deco-star-3">✦</div>
         
-        <form action="{{ route('login') }}" method="POST">
-            @csrf
-            <div class="register-form">
-                <h3 class="error">
-                    @if(session('error'))
+        <div class="auth-container">
+            <div class="auth-card">
+                <h1 class="auth-title">Welcome Back!</h1>
+                <p class="auth-subtitle">Login to continue your journey</p>
+                
+                @if(session('error'))
+                    <div class="auth-error-message">
                         {{ session('error') }}
-                    @endif
-                </h3>
-                <div class="input-group">
-                    <label for="">Email : </label>
-                    <input type="text" name="email" placeholder="Your Email" value="{{ old('email') }}">
-                    @error('email')
-                        <div class="error">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="input-group">
-                    <label for="">Password : </label>
-                    <input type="password" name="password" placeholder="Your Password">
-                    @error('password')
-                        <div class="error">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                    <button>Login</button>
-                </div>
-            </form>
+                    </div>
+                @endif
+                
+                <form action="{{ route('login') }}" method="POST" class="auth-form">
+                    @csrf
+                    
+                    <div class="auth-input-group">
+                        <label for="email" class="auth-label">Email</label>
+                        <input 
+                            type="text" 
+                            name="email" 
+                            id="email"
+                            placeholder="your@email.com" 
+                            value="{{ old('email') }}"
+                            class="auth-input @error('email') input-error @enderror"
+                        >
+                        @error('email')
+                            <div class="auth-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <div class="auth-input-group">
+                        <label for="password" class="auth-label">Password</label>
+                        <input 
+                            type="password" 
+                            name="password" 
+                            id="password"
+                            placeholder="••••••••" 
+                            class="auth-input @error('password') input-error @enderror"
+                        >
+                        @error('password')
+                            <div class="auth-error">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+                    <button type="submit" class="auth-button">Login</button>
+                    
+                    <p class="auth-link-text">
+                        Don't have an account? 
+                        <a href="{{ route('register') }}" class="auth-link">Register here</a>
+                    </p>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

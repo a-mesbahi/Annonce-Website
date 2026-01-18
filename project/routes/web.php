@@ -26,6 +26,9 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/contact', function () {
+    return view('contact');
+})->name('contact');
 
 Route::get('/dashboard',[DashboardController::class, 'index'])->name('dashboard');
 
@@ -41,6 +44,7 @@ Route::get('/Annonces',[AnnonceController::class, 'index'])->name('Annonces');
 Route::get('/Annonces/offer',[AnnonceController::class, 'offer'])->name('Annonces.offer');
 Route::get('/Annonces/request',[AnnonceController::class, 'request'])->name('Annonces.request');
 Route::post('/Annonces',[AnnonceController::class, 'store']);
+Route::get('/Annonces/{annonce}/show',[AnnonceController::class, 'show'])->name('Annonces.show');
 Route::delete('/Annonces/{annonce}',[AnnonceController::class, 'destroy'])->name('Annonces.destroy');
 Route::get('/Annonces/{annonce}',[AnnonceController::class, 'edit'])->name('Annnoces.edit');
 Route::put('/Annonces/{id}/update',[AnnonceController::class,'update'])->name('Annoce.update');

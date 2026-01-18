@@ -46,8 +46,10 @@ class AnnonceController extends Controller
         return back();
     }
 
-
-
+    public function show(Annonce $annonce)
+    {
+        return view('Annonces.show', compact('annonce'));
+    }
 
     public function destroy(Annonce $annonce)
     {

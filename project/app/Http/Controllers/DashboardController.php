@@ -20,7 +20,7 @@ class DashboardController extends Controller
         $totalAnnonces = $userAnnonces->count();
         $offerAnnonces = $userAnnonces->where('annonce_type', 'offer')->count();
         $requestAnnonces = $userAnnonces->where('annonce_type', 'request')->count();
-        $recentAnnonces = $userAnnonces->take(5);
+        $recentAnnonces = $userAnnonces; // Show all annonces
         
         return view('dashboard', [
             'user' => $user,
